@@ -16,7 +16,6 @@ namespace ScientiaChallenge.Controllers
             _usuarios = usuarios;
         }
         
-        //KISS
 
         [HttpGet("ObtenerUsuarios")]
         public async Task<IActionResult> ObtenerUsuarios()
@@ -28,14 +27,7 @@ namespace ScientiaChallenge.Controllers
             }
             else
             {
-                List<Usuario> lista = new List<Usuario>
-                {
-                    new Usuario {Nombre = "Dalila", Apellido = "Baena", Email = "dioasjd", Telefono = 1213},
-                    new Usuario {Nombre = "Paloma", Apellido = "Baena", Email = "aaa", Telefono = 1213},
-                };
-                listaUsuarios = lista;
-                return Ok(listaUsuarios);
-                //return BadRequest("La lista no contiene elementos"); //puedo poner cualquier status?
+                return BadRequest(listaUsuarios);
             }   
         }
         
@@ -45,36 +37,23 @@ namespace ScientiaChallenge.Controllers
            if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            try
-            {
                 var estado = await _usuarios.AgregarUsuario(usuario);
                 if (estado)
                     return Ok(estado);
                 else
                     return BadRequest("No se pudo agregar el usuario");
-            }
-            catch (Exception)
-            {
-                return BadRequest("No se pudo agregar un nuevo usuario.");
-            }
         }
 
-        [HttpPost("EliminarUsuario/{id}")]
+        [HttpDelete("EliminarUsuario/{id}")]
         public async Task<IActionResult> EliminarUsuario([FromRoute] int id)
         {
-            try
-            {
+            
                 var estado = await _usuarios.EliminarUsuario(id);
                 if (estado)
                     return Ok(estado);
                 else
-                    return BadRequest(estado);
-            }
-            catch (Exception)
-            {
-                return BadRequest("No se pudo eliminar el usuario");
-                //throw;
-            }
+                    return BadRequest("No se pudo eliminar el usuario");
+            
         }
 
         [HttpPost("ModificarUsuario")]
@@ -83,21 +62,12 @@ namespace ScientiaChallenge.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            try
-            {
                 var estado = await _usuarios.ModificarUsuario(usuario);
                 if (estado)
                     return Ok(estado);
                 else
-                    return BadRequest(estado);
-            }
-            catch (Exception)
-            {
-                return BadRequest("No se pudo modificar el usuario");
-                //throw;
-            }
+                    return BadRequest("No se pudo modificar el usuario");
             
-
         }
     }
 }

@@ -12,20 +12,46 @@ namespace ScientiaChallenge.Repositorio
 
         private static DataTable dtUsuarios = new DataTable();
 
+        public UsuarioRepo()
+        {
+            // Configurar las columnas en la tabla dtUsuarios si no existen
+            if (!dtUsuarios.Columns.Contains("Id"))
+                dtUsuarios.Columns.Add("Id", typeof(int));
+
+            if (!dtUsuarios.Columns.Contains("Nombre"))
+                dtUsuarios.Columns.Add("Nombre", typeof(string));
+
+            if (!dtUsuarios.Columns.Contains("Apellido"))
+                dtUsuarios.Columns.Add("Apellido", typeof(string));
+
+            if (!dtUsuarios.Columns.Contains("Email"))
+                dtUsuarios.Columns.Add("Email", typeof(string));
+
+            if (!dtUsuarios.Columns.Contains("Telefono"))
+                dtUsuarios.Columns.Add("Telefono", typeof(int));
+        }
+
         public async Task<bool> AgregarUsuario(Usuario usuario)
         {
-            //revisar como llega el ID para asignarle uno
+            //Se le asigna un id nuevo
+            int nuevoId = AsignarNuevoId();
             try
             {
-                dtUsuarios.Rows.Add(usuario);
+                DataRow dr = dtUsuarios.NewRow();
+                dr["Id"] = nuevoId;
+                dr["Nombre"] = usuario.Nombre;
+                dr["Apellido"] = usuario.Apellido;
+                dr["Email"] = usuario.Email;
+                dr["Telefono"] = usuario.Telefono;
+
+                dtUsuarios.Rows.Add(dr);
                 return true;
             }
             catch (Exception)
             {
                 return false;
-                //throw;
             }
-        }
+        } //
 
         public async Task<bool> EliminarUsuario(int id)
         {
@@ -47,13 +73,11 @@ namespace ScientiaChallenge.Repositorio
                     return false;
                 }
             }
-
-        }
+        } //
 
         public async Task<bool> ModificarUsuario(Usuario usuario)
         {
             //buscar si el usuario ya existe
-            
             var busqueda = BuquedaUsuario(usuario.Id);
             if(busqueda == null)
             {
@@ -75,14 +99,27 @@ namespace ScientiaChallenge.Repositorio
                     return false;
                 }
             }
-        }
+        } //
 
         public async Task<IEnumerable<Usuario>> ObtenerUsuarios()
         {
             return ConvertirDataTable(dtUsuarios);
-            //throw new NotImplementedException();
-        }
+        } //
 
+        private int AsignarNuevoId()
+        {
+            var lista = dtUsuarios.AsEnumerable();
+            if(lista.Count() != 0)
+            {
+                int ultimoId = lista.LastOrDefault().Field<int>("Id");
+                return ultimoId + 1;
+            }
+            else
+            {
+                return 1;
+            }
+            
+        }
         private DataRow BuquedaUsuario(int id)
         {
             var lista = dtUsuarios.AsEnumerable();
@@ -93,13 +130,17 @@ namespace ScientiaChallenge.Repositorio
         private List<Usuario> ConvertirDataTable(DataTable dt)
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
-            Usuario usuario = new Usuario();
+            //Usuario usuario = new Usuario();
             foreach (DataRow item in dt.Rows)
             {
+                Usuario usuario = new Usuario();
+                usuario.Id = (int)item["Id"];
                 usuario.Nombre = item["Nombre"].ToString();
                 usuario.Apellido = item["Apellido"].ToString();
                 usuario.Email = item["Email"].ToString();
                 usuario.Telefono = (int)item["Telefono"];
+
+                listaUsuarios.Add(usuario);
             }
             return listaUsuarios;
         }

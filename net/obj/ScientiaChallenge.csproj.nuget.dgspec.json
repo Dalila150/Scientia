@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\ScientiaChallenge.csproj": {}
+    "D:\\Repo\\Scientia\\net\\ScientiaChallenge.csproj": {}
   },
   "projects": {
-    "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\ScientiaChallenge.csproj": {
+    "D:\\Repo\\Scientia\\net\\ScientiaChallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\ScientiaChallenge.csproj",
+        "projectUniqueName": "D:\\Repo\\Scientia\\net\\ScientiaChallenge.csproj",
         "projectName": "ScientiaChallenge",
-        "projectPath": "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\ScientiaChallenge.csproj",
+        "projectPath": "D:\\Repo\\Scientia\\net\\ScientiaChallenge.csproj",
         "packagesPath": "C:\\Users\\dalila\\.nuget\\packages\\",
-        "outputPath": "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\obj\\",
+        "outputPath": "D:\\Repo\\Scientia\\net\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dalila\\AppData\\Roaming\\NuGet\\NuGet.Config",
