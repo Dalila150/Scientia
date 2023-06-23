@@ -1,0 +1,45 @@
+
+<!-- Formulario para agregar usuarios -->
+<div>
+    <h3>Agregar Usuario</h3>
+    <form (submit)="AgregarUsuario()">
+      <div>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required>
+      </div>
+      <div>
+        <label>Apellido:</label>
+        <input type="text" name="apellido" [(ngModel)]="nuevoUsuario.apellido" required>
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" name="email" [(ngModel)]="nuevoUsuario.email" required>
+      </div>
+      <div>
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required>
+      </div>
+      <button type="submit">Agregar</button>
+    </form>
+  </div>
+  
+  <!-- Lista de usuarios -->
+  <div>
+      <h3>Lista de Usuarios</h3>
+      <table>
+        <tr >
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let item of usuarios">
+          <td>{{ item.nombre }}</td>
+          <td>{{item.apellido }}</td>
+          <td>{{item.email }}</td>
+          <td>{{item.telefono }}</td>
+          <td><input type="button" value="Editar"></td>
+        </tr>
+      </table>
+    </div>

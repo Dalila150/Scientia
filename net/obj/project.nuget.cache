@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ROAEHtdB36Q74OpGuIwW+1J2Yb3ehoARRmdndpcMemxJCZnEGrYc0ME0C4RlA5B48NTtbHr8A9J2m6pRHEs8SQ==",
+  "success": true,
+  "projectFilePath": "D:\\Repo\\ScientiaChallenge\\net\\ScientiaChallenge\\ScientiaChallenge.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dalila\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\dalila\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\dalila\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\dalila\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\dalila\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\dalila\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
