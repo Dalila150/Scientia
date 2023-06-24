@@ -2,7 +2,7 @@
 <!-- Formulario para agregar usuarios -->
 <div class="Formulario-alta">
     <h3>Agregar Usuario</h3>
-    <form (ngSubmit)="AgregarUsuario()" aria-required="true">
+    <form required="true">
       <div>
         <label>Nombre:</label>
         <input type="text" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required>
@@ -19,7 +19,14 @@
         <label>Teléfono:</label>
         <input type="text" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required>
       </div>
-      <button class="btn btn-success" type="submit">Agregar</button>
+      <button (click)="AgregarUsuario()" class="btn btn-warning" type="submit">Guardar</button>
+      <button
+       *ngIf="nuevoUsuario.id !== 0" class="btn btn-warning" style="background-color: brown;" (click)="EliminarUsuario()" type="submit">
+       Eliminar
+      </button>
+      <div>
+        <label style="margin-top: 10px; color: brown;">{{ mensajeError }}</label>
+      </div>
     </form>
   </div>
   
@@ -39,12 +46,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of usuarios" [ngClass]="{'en-edicion': modoEdicion}">
+            <tr *ngFor="let item of usuarios" [class.active]="item == nuevoUsuario">
               <td>{{ item.nombre }}</td>
               <td>{{item.apellido }}</td>
               <td>{{item.email }}</td>
               <td>{{item.telefono }}</td>
-              <td><input class="btn btn-warning btn-sm" type="button" value="Editar" (click)="ActivarEdicion()"></td>
+              <td><input class="btn btn-warning btn-sm" type="button" value="Editar" (click)="ActivarEdicion(item)" ></td>
             </tr>
           </tbody>
           

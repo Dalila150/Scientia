@@ -19,16 +19,17 @@ namespace ScientiaChallenge.Controllers
 
         [HttpGet("ObtenerUsuarios")]
         public async Task<IActionResult> ObtenerUsuarios()
+        
         {
             var listaUsuarios = await _usuarios.ObtenerUsuarios();
-            if(listaUsuarios.Count() != 0)
-            {
+            //if(listaUsuarios.Count() != 0)
+            //{
                 return Ok(listaUsuarios);
-            }
-            else
-            {
-                return BadRequest(listaUsuarios);
-            }   
+            //}
+            //else
+            //{
+            //    return BadRequest(listaUsuarios);
+            //}   
         }
         
         [HttpPost("AgregarUsuario")]
