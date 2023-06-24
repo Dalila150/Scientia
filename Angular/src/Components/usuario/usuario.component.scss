@@ -1,0 +1,52 @@
+/*.Formulario-alta {
+    display: flex;
+  //justify-content: center;
+  //align-items: center;
+}
+
+.Formulario-listado {
+  display: flex;
+    //align-items: center;
+}*/
+
+.Formulario-alta {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.Formulario-alta input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.Formulario-alta label {
+  font-weight: bold;
+}
+
+.Formulario-alta button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.Formulario-alta button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.table-container {
+  max-width: 800px; /* Ajusta el valor según el ancho deseado */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  margin-top: 50px;
+}
+
+tr.en-edicion input[type="text"] {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  /* Otros estilos de edición que desees aplicar */
+}

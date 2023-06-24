@@ -1,8 +1,8 @@
 
 <!-- Formulario para agregar usuarios -->
-<div>
+<div class="Formulario-alta">
     <h3>Agregar Usuario</h3>
-    <form (submit)="AgregarUsuario()">
+    <form (ngSubmit)="AgregarUsuario()" aria-required="true">
       <div>
         <label>Nombre:</label>
         <input type="text" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required>
@@ -19,27 +19,36 @@
         <label>Teléfono:</label>
         <input type="text" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required>
       </div>
-      <button type="submit">Agregar</button>
+      <button class="btn btn-success" type="submit">Agregar</button>
     </form>
   </div>
   
   <!-- Lista de usuarios -->
-  <div>
+  <div class="Formulario-listado">
+    <div class="table-container">
       <h3>Lista de Usuarios</h3>
-      <table>
-        <tr >
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let item of usuarios">
-          <td>{{ item.nombre }}</td>
-          <td>{{item.apellido }}</td>
-          <td>{{item.email }}</td>
-          <td>{{item.telefono }}</td>
-          <td><input type="button" value="Editar"></td>
-        </tr>
-      </table>
+      
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of usuarios" [ngClass]="{'en-edicion': modoEdicion}">
+              <td>{{ item.nombre }}</td>
+              <td>{{item.apellido }}</td>
+              <td>{{item.email }}</td>
+              <td>{{item.telefono }}</td>
+              <td><input class="btn btn-warning btn-sm" type="button" value="Editar" (click)="ActivarEdicion()"></td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+      
     </div>

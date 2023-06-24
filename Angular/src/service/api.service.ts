@@ -21,11 +21,16 @@ export class ApiService {
   public AgregarUsuario(nuevoUsuario: any): Observable<any>{
     return this.http
     .post('http://localhost:5204/api/Usuario/AgregarUsuario', nuevoUsuario);
-}
+  } 
 
-  public GetData2(): Observable<any>{
+  public EliminarUsuario(idUsuario: number): Observable<any>{
     return this.http
-    .get<any>(`http://localhost:5204/WeatherForecast`);
-}
+    .delete('http://localhost:5204/api/Usuario/EliminarUsuario/' + idUsuario);
+  }
+ 
+  public ModificarUsuario(usuario: any): Observable<any>{
+    return this.http
+    .post('http://localhost:5204/api/Usuario/ModificarUsuario', usuario);
+  }
 
 }

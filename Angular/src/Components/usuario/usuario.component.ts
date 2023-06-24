@@ -16,19 +16,17 @@ class Usuario {
 })
 
 export class UsuarioComponent {
-//prueba
-  //data: any[] = [];
-  
+
   usuarios: Usuario[] = [];
   nuevoUsuario: Usuario = { nombre: '', apellido: '', email: '', telefono: '' };
+  usuarioEditado: Usuario = { nombre: '', apellido: '', email: '', telefono: '' };
+  idEliminar: number = 0;
+  modoEdicion: boolean = false;
 
   constructor(private apiService: ApiService) {
     this.ObtenerUsuarios();
   }
 
-  ngOnInit(): void{
-    
-  }
 
   ObtenerUsuarios(): void {
     this.apiService.ObtenerUsuarios().subscribe( usuarios =>{
@@ -42,7 +40,36 @@ export class UsuarioComponent {
       this.nuevoUsuario = { nombre: '', apellido: '', email: '', telefono: '' };
       this.ObtenerUsuarios();
     });
-}
+  }
+
+  EliminarUsuario(): void {
+    this.apiService.EliminarUsuario(this.idEliminar).subscribe(() => {
+      this.nuevoUsuario = { nombre: '', apellido: '', email: '', telefono: '' };
+      this.ObtenerUsuarios();
+    });
+  }
+
+  ModificarUsuario(): void {
+    this.apiService.AgregarUsuario(this.nuevoUsuario).subscribe(() => {
+      this.nuevoUsuario = { nombre: '', apellido: '', email: '', telefono: '' };
+      this.ObtenerUsuarios();
+    });
+  }
+
+  ActivarEdicion() {
+    this.usuarioEditado.nombre
+    this.modoEdicion = true;
+  }
+
+  GuardarEdicion(usuario: Usuario) {
+    this.ModificarUsuario();
+    this.modoEdicion = false
+  }
+
+  CancelarEdicion() {
+    this.modoEdicion = !this.modoEdicion;
+  }
+
   
   /*ObtenerData(): void{
     this.apiService.GetData2().subscribe( data =>{
