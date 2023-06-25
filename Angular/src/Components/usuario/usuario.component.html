@@ -1,61 +1,65 @@
-
 <!-- Formulario para agregar usuarios -->
 <div class="Formulario-alta">
-    <h3>Agregar Usuario</h3>
-    <form required="true">
-      <div>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required>
-      </div>
-      <div>
-        <label>Apellido:</label>
-        <input type="text" name="apellido" [(ngModel)]="nuevoUsuario.apellido" required>
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" name="email" [(ngModel)]="nuevoUsuario.email" required>
-      </div>
-      <div>
-        <label>Teléfono:</label>
-        <input type="text" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required>
-      </div>
-      <button (click)="AgregarUsuario()" class="btn btn-warning" type="submit">Guardar</button>
-      <button
-       *ngIf="nuevoUsuario.id !== 0" class="btn btn-warning" style="background-color: brown;" (click)="EliminarUsuario()" type="submit">
-       Eliminar
-      </button>
-      <div>
-        <label style="margin-top: 10px; color: brown;">{{ mensajeError }}</label>
-      </div>
-    </form>
-  </div>
-  
-  <!-- Lista de usuarios -->
-  <div class="Formulario-listado">
-    <div class="table-container">
-      <h3>Lista de Usuarios</h3>
-      
-        <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Email</th>
-              <th>Teléfono</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of usuarios" [class.active]="item == nuevoUsuario">
-              <td>{{ item.nombre }}</td>
-              <td>{{item.apellido }}</td>
-              <td>{{item.email }}</td>
-              <td>{{item.telefono }}</td>
-              <td><input class="btn btn-warning btn-sm" type="button" value="Editar" (click)="ActivarEdicion(item)" ></td>
-            </tr>
-          </tbody>
-          
-        </table>
-      </div>
-      
+  <h3>Agregar Usuario</h3>
+  <form required="true">
+    <div>
+      <label>Nombre: (Solo se aceptan letras)</label>
+      <input type="text" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required (input)="ValidarUsuario()">
     </div>
+    <div>
+      <label>Apellido: (Solo se aceptan letras)</label>
+      <input type="text" name="apellido" [(ngModel)]="nuevoUsuario.apellido" required (input)="ValidarUsuario()">
+    </div>
+    <div>
+      <label>Email: (Solo se aceptan emails validos)</label>
+      <input type="email" name="email" [(ngModel)]="nuevoUsuario.email" required (input)="ValidarUsuario()">
+    </div>
+    <div>
+      <label>Teléfono: (Solo se aceptan numeros)</label>
+      <input type="text" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required (input)="ValidarUsuario()">
+    </div>
+    <div *ngIf="estadoBoton">
+      <button  (click)="AgregarUsuario()" class="btn btn-warning" type="submit">Guardar</button>
+    </div>
+    <div *ngIf="!estadoBoton">
+      <button disabled class="btn btn-warning" type="submit">Guardar</button>
+    </div>
+    <button *ngIf="nuevoUsuario.id !== 0" class="btn btn-warning" style="background-color: brown;"
+      (click)="EliminarUsuario()" type="submit">
+      Eliminar
+    </button>
+    <div>
+      <label style="margin-top: 10px; color: brown;">{{ mensajeError }}</label>
+    </div>
+  </form>
+</div>
+
+<!-- Lista de usuarios -->
+<div class="Formulario-listado">
+  <div class="table-container">
+    <h3>Lista de Usuarios</h3>
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usuarios" [class.active]="item == nuevoUsuario">
+          <td>{{ item.nombre }}</td>
+          <td>{{item.apellido }}</td>
+          <td>{{item.email }}</td>
+          <td>{{item.telefono }}</td>
+          <td><input class="btn btn-warning btn-sm" type="button" value="Editar" (click)="ActivarEdicion(item)"></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>

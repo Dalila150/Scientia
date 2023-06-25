@@ -20,6 +20,8 @@ export class UsuarioComponent {
   usuarios: Usuario[] = [];
   nuevoUsuario: Usuario = {id: 0, nombre: '', apellido: '', email: '', telefono: '' };
   mensajeError: string = '';
+  soloNumerosPattern = '^[0-9]*$';
+  estadoBoton = false;
  
 
   constructor(private apiService: ApiService) {
@@ -34,7 +36,7 @@ export class UsuarioComponent {
   }
 
   AgregarUsuario(): void {
-    if(this.ValidarUsuario(this.nuevoUsuario) === true){
+    
       if(this.nuevoUsuario.id === 0){  //no se selecciono nada de la tabla
         this.apiService.AgregarUsuario(this.nuevoUsuario).subscribe(() => {
           this.nuevoUsuario = {id: 0, nombre: '', apellido: '', email: '', telefono: '' };
@@ -46,10 +48,7 @@ export class UsuarioComponent {
         this.ModificarUsuario();
         this.mensajeError = '';
       }
-    }
-    else{
-      this.mensajeError = 'Por favor, complete los campos faltantes.';
-    }
+    
   }
 
   EliminarUsuario(): void {
@@ -78,24 +77,66 @@ export class UsuarioComponent {
 
   }
 
-  ValidarUsuario(usuario: Usuario): boolean{
+  ValidarUsuario(): void{
 
-    if(usuario.nombre.trim() === ''){
-      return false;
+    if(this.onNombreChange() && this.onApellidoChange() && this.onEmailChange() && this.onTelefonoChange()){
+      this.mensajeError = '';
+      this.estadoBoton = true;
     }
-
-    if(usuario.apellido.trim() === ''){
-      return false;
-    }
-    
-    if(usuario.email.trim() === ''){
-      return false;
+    else{
+      this.mensajeError = 'Por favor, complete los campos faltantes.';
+      this.estadoBoton = false;
     }
 
-    if(usuario.telefono === ''){
-      return false;
-    }
+
+  }
+
+ onNombreChange(): boolean{
+  const nombre = this.nuevoUsuario.nombre;
+  const soloLetras = /^[a-zA-Z]*$/;
+
+  if(!soloLetras.test(nombre) || nombre.trim() === ''){
+    return false;
+  }
+  else{
     return true;
+  }
+ }
+
+ onApellidoChange(): boolean{
+  const apellido = this.nuevoUsuario.apellido;
+  const soloLetras = /^[a-zA-Z]*$/;
+
+  if(!soloLetras.test(apellido) || apellido.trim() === ''){
+    return false;
+  }
+  else{
+    return true;
+  }
+ }
+
+ onEmailChange(): boolean{
+  const email = this.nuevoUsuario.email;
+  const symbol = email.split('@').length - 1;
+
+  if(symbol !== 1 || email === ''){
+    return false;
+  }
+  else{
+    return true;
+  }
+ }
+
+  onTelefonoChange():boolean {
+    const telefono = this.nuevoUsuario.telefono;
+    const soloNumeros = /^[0-9]*$/;
+    
+    if (!soloNumeros.test(telefono) || telefono === '') {
+      return false;
+    }
+    else{
+      return true;
+    }
 
   }
 }
